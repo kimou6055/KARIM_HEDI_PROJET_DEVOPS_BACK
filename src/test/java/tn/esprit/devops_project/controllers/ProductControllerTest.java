@@ -29,9 +29,8 @@ class ProductControllerTest {
     void testRetrieveProduct() {
         // Arrange
         Long productId = 1L;
-        Product mockProduct = new Product();
-        mockProduct.setId(productId);
-        mockProduct.setName("Sample Product");
+        // Assuming Product has a constructor Product(Long id, String name) or adjust accordingly
+        Product mockProduct = new Product(productId, "Sample Product"); // Adjust constructor parameters if different
 
         when(productService.retrieveProduct(productId)).thenReturn(mockProduct);
 
@@ -40,7 +39,7 @@ class ProductControllerTest {
 
         // Assert
         assertNotNull(retrievedProduct, "The retrieved product should not be null");
-        assertEquals(productId, retrievedProduct.getId(), "The product ID should match the expected value");
-        assertEquals("Sample Product", retrievedProduct.getName(), "The product name should match the expected value");
+        assertEquals(productId, retrievedProduct.getId(), "The product ID should match the expected value"); // Adjust getter if needed
+        assertEquals("Sample Product", retrievedProduct.getName(), "The product name should match the expected value"); // Adjust getter if needed
     }
 }
