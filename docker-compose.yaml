@@ -19,7 +19,7 @@ services:
 
   # Spring Boot Application Service
   projectdevops:
-    image: kimou605/projectdevops:1.0.0
+    image: hedisouissi/projectdevops:1.0.0
     container_name: projectdevops
     depends_on:
       - mysql
