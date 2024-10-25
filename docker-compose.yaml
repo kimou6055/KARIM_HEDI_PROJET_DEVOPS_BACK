@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # MySQL Database Service
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: devops_db
+      MYSQL_USER: devops_user
+      MYSQL_PASSWORD: devops_password
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - devops_network
+
+  # Spring Boot Application Service
+  projectdevops:
+    image: kimou605/projectdevops:1.0.0
+    container_name: projectdevops
+    depends_on:
+      - mysql
+    ports:
+      - "8082:8082"
+    networks:
+      - devops_network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devops_db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+
+networks:
+  devops_network:
+
+volumes:
+  mysql_data:
