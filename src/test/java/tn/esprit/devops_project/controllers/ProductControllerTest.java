@@ -6,6 +6,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import tn.esprit.devops_project.entities.Product;
+import tn.esprit.devops_project.entities.ProductCategory;
+import tn.esprit.devops_project.entities.Stock;
 import tn.esprit.devops_project.services.Iservices.IProductService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,8 +31,14 @@ class ProductControllerTest {
     void testRetrieveProduct() {
         // Arrange
         Long productId = 1L;
-        // Assuming Product has a constructor Product(Long id, String name) or adjust accordingly
-        Product mockProduct = new Product(productId, "Sample Product"); // Adjust constructor parameters if different
+        String productName = "Sample Product";
+        float price = 100.0f;
+        int quantity = 10;
+        ProductCategory category = ProductCategory.ELECTRONICS; // Adjust category if needed
+        Stock stock = new Stock(); // Initialize Stock appropriately if needed
+
+        // Using the complete constructor as per the error message
+        Product mockProduct = new Product(productId, productName, price, quantity, category, stock);
 
         when(productService.retrieveProduct(productId)).thenReturn(mockProduct);
 
@@ -39,7 +47,7 @@ class ProductControllerTest {
 
         // Assert
         assertNotNull(retrievedProduct, "The retrieved product should not be null");
-        assertEquals(productId, retrievedProduct.getId(), "The product ID should match the expected value"); // Adjust getter if needed
-        assertEquals("Sample Product", retrievedProduct.getName(), "The product name should match the expected value"); // Adjust getter if needed
+        assertEquals(productId, retrievedProduct.getProductId(), "The product ID should match the expected value"); // Adjust getter if needed
+        assertEquals(productName, retrievedProduct.getProductName(), "The product name should match the expected value"); // Adjust getter if needed
     }
 }
