@@ -31,14 +31,14 @@ class ProductControllerTest {
     void testRetrieveProduct() {
         // Arrange
         Long productId = 1L;
-        String productName = "Sample Product";
+        String productTitle = "Sample Product";
         float price = 100.0f;
         int quantity = 10;
         ProductCategory category = ProductCategory.ELECTRONICS; // Adjust category if needed
         Stock stock = new Stock(); // Initialize Stock appropriately if needed
 
-        // Using the complete constructor as per the error message
-        Product mockProduct = new Product(productId, productName, price, quantity, category, stock);
+        // Create Product using constructor with all arguments
+        Product mockProduct = new Product(productId, productTitle, price, quantity, category, stock);
 
         when(productService.retrieveProduct(productId)).thenReturn(mockProduct);
 
@@ -47,7 +47,7 @@ class ProductControllerTest {
 
         // Assert
         assertNotNull(retrievedProduct, "The retrieved product should not be null");
-        assertEquals(productId, retrievedProduct.getProductId(), "The product ID should match the expected value"); // Adjust getter if needed
-        assertEquals(productName, retrievedProduct.getProductName(), "The product name should match the expected value"); // Adjust getter if needed
+        assertEquals(productId, retrievedProduct.getIdProduct(), "The product ID should match the expected value");
+        assertEquals(productTitle, retrievedProduct.getTitle(), "The product title should match the expected value");
     }
 }
