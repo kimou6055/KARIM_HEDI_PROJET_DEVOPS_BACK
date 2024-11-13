@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projectdevops-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: projectdevops
+  template:
+    metadata:
+      labels:
+        app: projectdevops
+    spec:
+      containers:
+      - name: projectdevops
+        image: kimou605/projectdevops:1.0.0
+        ports:
+        - containerPort: 80
